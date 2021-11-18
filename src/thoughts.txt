@@ -1,0 +1,3 @@
+No More Thoughts, just TODOs
+
+//TODO refactor code to have a clearer difference between "film" and "ticket". Rename those names. also with ticketlist
