@@ -6,6 +6,8 @@ public class TicketMachine {
     TicketList TL1;
     ArrayList<Ticket> temporaryReservedTicketsList = new ArrayList<>();
     Ticket ticketChosen;
+    double balance;
+    String currency = "$";
 
     TicketMachine() {
         TL1 = new TicketList();
@@ -15,12 +17,24 @@ public class TicketMachine {
         showFilms();
         ticketChosen = chooseFilm();
 //        TESTprintTicket();
-        putFilmFromAvailableOnReserve(ticketChosen);
-        putFilmFromReserveOnAvailable(ticketChosen);
+        putTicketFromAvailableOnTempReserve(ticketChosen);
+        putTicketFromTempReserveOnAvailable(ticketChosen);
+    }
+
+    //TODO Pseudo code abort()
+    void abort(){
+        if (balance > 0){
+            returnMoney(balance);
+        }
+    }
+
+    //TODO This method isn't finished yet. This is just an idea.
+    void returnMoney(double balance){
+        System.out.printf("here is your %s%.2f back", currency, balance);
     }
 
     //When a client chooses a ticket their choice needs to be reserved until completion or cancellation of the process
-    void putFilmFromAvailableOnReserve(Ticket ticket){
+    void putTicketFromAvailableOnTempReserve(Ticket ticket){
         int originalIndexOfTicket = TL1.allFilms.indexOf(ticket); //perhaps change var name to indexOfTicketAvailableList
         temporaryReservedTicketsList.add(ticket);
         TL1.allFilms.remove(originalIndexOfTicket);
@@ -30,8 +44,8 @@ public class TicketMachine {
     }
 
     //In case of procedure termination the ticket needs to be put back on the available list
-    void putFilmFromReserveOnAvailable(Ticket ticket){
-        //TODO The name could use some work. putTicketFromReserveOnAvailable or something like that.
+    void putTicketFromTempReserveOnAvailable(Ticket ticket){
+
         int indexOfTicketReservedList = temporaryReservedTicketsList.indexOf(ticket);
         TL1.allFilms.add(ticket);
         temporaryReservedTicketsList.remove(ticket);
@@ -40,7 +54,7 @@ public class TicketMachine {
         System.out.println("List of available films (TL1.allFilms): "+TL1.allFilms);
     }
 
-    void showFilms(){ //Should I pass a ticketlist as a parameter here? in case of different film lists (not for now)
+    void showFilms(){ //TODO Should I pass a ticketlist as a parameter here? in case of different film lists (not for now)
         //I want this to iterate through the list so that if I update the tickets it takes this into account and
         // chooseFilm doesn't have a problem with it. This merely goes if I stick to the same number of unique films
         // otherwise the switch statement doesn't work anymore. That is based on 2 films right now.
