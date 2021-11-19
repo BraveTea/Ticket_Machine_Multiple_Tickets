@@ -16,11 +16,12 @@ public class TicketMachine {
         ticketChosen = chooseFilm();
 //        TESTprintTicket();
         putFilmFromAvailableOnReserve(ticketChosen);
+        putFilmFromReserveOnAvailable(ticketChosen);
     }
 
     //When a client chooses a ticket their choice needs to be reserved until completion or cancellation of the process
     void putFilmFromAvailableOnReserve(Ticket ticket){
-        int originalIndexOfTicket = TL1.allFilms.indexOf(ticket);
+        int originalIndexOfTicket = TL1.allFilms.indexOf(ticket); //perhaps change var name to indexOfTicketAvailableList
         temporaryReservedTicketsList.add(ticket);
         TL1.allFilms.remove(originalIndexOfTicket);
         //Lines below are for testing only
@@ -29,10 +30,14 @@ public class TicketMachine {
     }
 
     //In case of procedure termination the ticket needs to be put back on the available list
-    void putFilmFromReserveBackToAllAvailableTicketsList(Ticket ticket){
-        //TODO write this method. It is the reverse of putFilmOnReserve() and it is meant to be used if a ticket
-        // or at least the procedure of buying a ticket is cancelled.
-        // The name could also use some work. putTicketFromReserveOnAvailable or something like that.
+    void putFilmFromReserveOnAvailable(Ticket ticket){
+        //TODO The name could use some work. putTicketFromReserveOnAvailable or something like that.
+        int indexOfTicketReservedList = temporaryReservedTicketsList.indexOf(ticket);
+        TL1.allFilms.add(ticket);
+        temporaryReservedTicketsList.remove(ticket);
+        //The lines below are test lines
+        System.out.println("List of temporarily reserved films (temporaryReservedTicketsList): " + temporaryReservedTicketsList);
+        System.out.println("List of available films (TL1.allFilms): "+TL1.allFilms);
     }
 
     void showFilms(){ //Should I pass a ticketlist as a parameter here? in case of different film lists (not for now)
