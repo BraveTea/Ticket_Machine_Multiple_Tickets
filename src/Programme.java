@@ -4,6 +4,7 @@ public class Programme {
         System.out.printf("%s%n", "test");
 
         TicketMachine TM1 = new TicketMachine();
+        TicketMachine TM2 = new TicketMachine();
 
 //        System.out.println(TM1.TL1.allFilms);
 //        System.out.println((TM1.TL1.allFilms.get(0).getPrice()) + 12); //testing to see if this actually gets the double
