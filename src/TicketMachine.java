@@ -130,7 +130,7 @@ public class TicketMachine {
     private void paymentSystem(){
         while (!enoughBalance()) {
             System.out.printf("The current amount left to pay is: %.2f%n", remainderOfCosts());
-            abortChoice();
+            continueChoice();
             inputMoney();
 
         }
@@ -144,8 +144,8 @@ public class TicketMachine {
         System.out.printf("Here is your change back: %s%.2f%n", currency, change);
     }
 
-    private void abortChoice() {
-        System.out.printf("Do you wish to abort? Press Y/Yes or N/No%n"); //this should ask "do you wish to continue" but then the logic falls apart a little bit. User-wise I would ask continue
+    private void continueChoice() {
+        System.out.printf("Do you wish to continue? Press Y/Yes or N/No%n"); //this should ask "do you wish to continue" but then the logic falls apart a little bit. User-wise I would ask continue
         Scanner userChoice = new Scanner(System.in);
         String choice = userChoice.nextLine();
         switch (choice){
@@ -153,12 +153,12 @@ public class TicketMachine {
             case "Yes":
             case "y":
             case "yes":
-                abort();
+                break;
             case "N":
             case "No":
             case "n":
             case "no":
-                break;
+                abort();
         }
     }
 
