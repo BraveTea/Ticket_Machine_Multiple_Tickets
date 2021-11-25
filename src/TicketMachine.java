@@ -9,7 +9,7 @@ public class TicketMachine {
     private ArrayList<Ticket> temporarilyReservedTicketsList = new ArrayList<>();
     private Ticket ticketChosen;
     private double balance;
-    private String currency = "$";
+    private final String currency = "$";
 
 
     TicketMachine() {
