@@ -3,14 +3,18 @@ import java.util.ArrayList;
 
 public class TicketMachine {
 
-    TicketList TL1;
+    ArrayList<Ticket> availableTicketsList = new ArrayList<>();
     ArrayList<Ticket> temporaryReservedTicketsList = new ArrayList<>();
     Ticket ticketChosen;
     double balance;
     String currency = "$";
 
     TicketMachine() {
-        TL1 = new TicketList();
+        Ticket SW4 = new Ticket("StarWars 4", 12);
+        Ticket IJ1 = new Ticket("Indiana Jones 1", 12);
+
+        availableTicketsList.add(SW4);
+        availableTicketsList.add(IJ1);
     }
 
     void buyTicket(){
@@ -35,11 +39,11 @@ public class TicketMachine {
 
     //When a client chooses a ticket their choice needs to be reserved until completion or cancellation of the process
     void putTicketFromAvailableOnTempReserve(Ticket ticket){
-        int originalIndexOfTicket = TL1.allFilms.indexOf(ticket); //perhaps change var name to indexOfTicketAvailableList
+        int originalIndexOfTicket = availableTicketsList.indexOf(ticket); //perhaps change var name to indexOfTicketAvailableList
         temporaryReservedTicketsList.add(ticket);
-        TL1.allFilms.remove(originalIndexOfTicket);
+        availableTicketsList.remove(originalIndexOfTicket);
         //Lines below are for testing only
-        System.out.println("List of available films (TL1.allFilms): "+TL1.allFilms);
+        System.out.println("List of available films (availableTicketsList): "+availableTicketsList);
         System.out.println("List of temporarily reserved films (temporaryReservedTicketsList): " + temporaryReservedTicketsList);
     }
 
@@ -47,11 +51,11 @@ public class TicketMachine {
     void putTicketFromTempReserveOnAvailable(Ticket ticket){
 
         int indexOfTicketReservedList = temporaryReservedTicketsList.indexOf(ticket);
-        TL1.allFilms.add(ticket);
+        availableTicketsList.add(ticket);
         temporaryReservedTicketsList.remove(ticket);
         //The lines below are test lines
         System.out.println("List of temporarily reserved films (temporaryReservedTicketsList): " + temporaryReservedTicketsList);
-        System.out.println("List of available films (TL1.allFilms): "+TL1.allFilms);
+        System.out.println("List of available films (availableTicketsList): "+availableTicketsList);
     }
 
     void showFilms(){ //TODO Should I pass a ticketlist as a parameter here? in case of different film lists (not for now)
@@ -61,8 +65,8 @@ public class TicketMachine {
 
         System.out.println("Please choose a film by entering the corresponding number: ");
 
-        for (int i = 0; i < TL1.allFilms.size(); i++){
-            System.out.printf("%d : %s%n", i+1, TL1.allFilms.get(i).getName());
+        for (int i = 0; i < availableTicketsList.size(); i++){
+            System.out.printf("%d : %s%n", i+1, availableTicketsList.get(i).getName());
         }
     }
 
@@ -75,9 +79,9 @@ public class TicketMachine {
         int choice = userInput.nextInt();
         switch (choice){
             case 1: //SW4, only during testing
-                return TL1.allFilms.get(0);
+                return availableTicketsList.get(0);
             case 2: //IJ1, only during testing
-                return TL1.allFilms.get(1);
+                return availableTicketsList.get(1);
             default:
                 throw new IllegalStateException("Unexpected value: " + choice); //IDEA gave me this. I like it :)
         } //Can I write a try/catch for this throw? How does that work? TODO figure out "throw try catch exceptions"
