@@ -1,3 +1,5 @@
+//I am not sure about this, but Rick told me that when using a record all objects are the same, but I want
+
 public record Ticket(String name, double price) {
 
     public double getPrice() {
