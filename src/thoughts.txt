@@ -1,3 +1,9 @@
-No More Thoughts, just TODOs
+//TODO Write a method that lets the user choose the amount of different films. How many different films does the user want to buy. Make this a method that has a forloop that runs choose film so many times.
+//TODO write method that let's the user choose the amount of tickets for a specific film
 
 //TODO refactor code to have a clearer difference between "film" and "ticket". Rename those names. also with ticketlist
+
+//When I go to multiple tickets per film I probably need to create automatically filled lists per film. So a list
+    that has 20 SW4 films in it. Then the choosefilm probably needs to be rewritten to accommodate this.
+    I think that would be always pick index 0, and then remove the film from available list so a new Ticket becomes
+    index 0.
