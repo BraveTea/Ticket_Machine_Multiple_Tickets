@@ -41,6 +41,8 @@ public class TicketMachine {
         System.out.printf("The current total amount of your chosen tickets is: %s%.2f%n", currency, totalAmount);
     }
 
+    //TODO the name of this method should be different, I am talking about "money" when I say amount, but right now
+    // it could easily seem it means "number of tickets"
     private double totalAmountOfChosenTickets(@NotNull ArrayList<Ticket> tempList){
         //shows a sum of all films on the passed list. This programme should mostly use the temporarilyReservedTicketsList
         double totalAmount = 0;
@@ -51,6 +53,7 @@ public class TicketMachine {
     }
 
     void abort(){
+        payOutEntireBalance();
         System.out.printf("thank you, byebye%n");
         System.exit(0);
     }
@@ -59,8 +62,9 @@ public class TicketMachine {
         return balance >= totalAmountOfChosenTickets(temporarilyReservedTicketsList);
     }
 
-    private double payOutEntireBalance(double balance){
-        return balance;
+    private void payOutEntireBalance(){
+        System.out.printf("Here is your full payment of %s%.2f back.%n", currency, getBalance());
+        resetBalanceToZero();
     }
 
     //When a client chooses a ticket their choice needs to be reserved until completion or cancellation of the process
